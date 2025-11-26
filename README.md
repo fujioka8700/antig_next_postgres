@@ -27,6 +27,7 @@ $ npx prisma init
 # Prismaスキーマを強制的にデータベースに同期（開発環境向け）
 $ npx prisma db push
 
+# Prismaスキーマに基づきPrisma Clientを生成する
 $ npx prisma generate
 
 # 以下を実行し、http://localhost:5555/にアクセスするとPrisma Studioが使える
