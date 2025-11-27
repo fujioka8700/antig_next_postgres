@@ -76,4 +76,7 @@ $ git checkout <タグ名>
 
 # 過去のタグから新しいブランチを作成する
 $ git checkout -b <新しいブランチ名> <タグ名>
+
+# ローカルブランチを安全に削除する
+$ git branch -d <branch-name>
 ```
