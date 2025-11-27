@@ -1,6 +1,6 @@
 # antig_next_postgres
 
-Antigravity を使う前の準備。
+## Antigravity を使う前の準備。
 
 ```bash
 # Next.jsアプリ作成
@@ -57,4 +57,23 @@ model Todo {
   id    Int     @id @default(autoincrement())
   title String
 }
+```
+
+## その他のコマンド
+
+```bash
+# タグの作成
+$ git tag v1.0.0
+
+# タグの一覧表示
+$ git tag
+
+# ブランチの切り替え
+$ git switch develop
+
+# 既存のブランチを一時的に切り替える（チェックアウト）
+$ git checkout <タグ名>
+
+# 過去のタグから新しいブランチを作成する
+$ git checkout -b <新しいブランチ名> <タグ名>
 ```
