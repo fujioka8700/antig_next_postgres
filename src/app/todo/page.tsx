@@ -27,6 +27,24 @@ async function createTodo(formData: FormData) {
   }
 }
 
+async function deleteTodo(formData: FormData) {
+  'use server';
+  const id = formData.get('id') as string;
+
+  if (!id) return;
+
+  try {
+    await prisma.todo.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+    revalidatePath('/');
+  } catch (error) {
+    console.error('Error deleting todo:', error);
+  }
+}
+
 // データの読み込み関数
 // 戻り値の型をTodo[]として明示的に指定
 async function getTodos(): Promise<Todo[]> {
@@ -89,9 +107,33 @@ export default async function HomePage() {
           {todos.map((todo: Todo) => (
             <li
               key={todo.id}
-              style={{ padding: '10px 0', borderBottom: '1px solid #eee' }}
+              style={{
+                padding: '10px 0',
+                borderBottom: '1px solid #eee',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
-              ID: {todo.id} - {todo.title}
+              <span>
+                ID: {todo.id} - {todo.title}
+              </span>
+              <form action={deleteTodo}>
+                <input type="hidden" name="id" value={todo.id} />
+                <button
+                  type="submit"
+                  style={{
+                    padding: '5px 10px',
+                    background: 'red',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    marginLeft: '10px',
+                  }}
+                >
+                  削除
+                </button>
+              </form>
             </li>
           ))}
         </ul>
